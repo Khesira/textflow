@@ -1,0 +1,22 @@
+{
+  "name": "@khesira/textflow",
+  "version": "1.0.0",
+  "description": "A framework agnostic canvas physics text slider",
+  "type": "module",
+  "main": "./dist/textflow.umd.cjs",
+  "module": "./dist/textflow.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/textflow.es.js",
+      "require": "./dist/textflow.umd.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  }
+}
