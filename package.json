@@ -1,6 +1,8 @@
 {
   "name": "@khesira/textflow",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "license": "MIT",
+  "author": "Mika Jünger",
   "description": "A framework agnostic canvas physics text slider",
   "type": "module",
   "repository": {
