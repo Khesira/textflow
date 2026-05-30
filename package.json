@@ -1,8 +1,16 @@
 {
   "name": "@khesira/textflow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A framework agnostic canvas physics text slider",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khesira/textflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/khesira/textflow/issues"
+  },
+  "homepage": "https://github.com/khesira/textflow#readme",
   "main": "./dist/textflow.umd.cjs",
   "module": "./dist/textflow.es.js",
   "types": "./dist/index.d.ts",
