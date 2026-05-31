@@ -1,8 +1,8 @@
-import type { Settings } from "./types";
-import type { World } from "./World";
-import { TextElement } from "./TextElement";
-import type { TextFlowView } from "./TextFlowView";
-import type { Direction } from "./Direction";
+import type {Settings} from "./types";
+import type {World} from "./World";
+import {TextElement} from "./TextElement";
+import type {TextFlowView} from "./TextFlowView";
+import type {Direction} from "./Direction";
 
 export class TextWriter {
     private _textId: number | undefined = undefined;
@@ -37,7 +37,9 @@ export class TextWriter {
         }
 
         if (this._world.elements.length >= this._maxTexts) {
-            this._textId = this.randomSetTimeout(() => this.addText(), 1000, 2500);
+            this._textId = this.randomSetTimeout(
+                () => this.addText(), this._settings.minSpawnMs, this._settings.maxSpawnMs
+            );
             return;
         }
 
@@ -66,7 +68,7 @@ export class TextWriter {
         if (dirY > 0) {
             yPosition = -fontSize + this._marginTop;
         } else if (dirY < 0) {
-            yPosition = this._height - this._marginBottom;
+            yPosition = this._height + this._marginBottom + fontSize;
         } else {
             yPosition = this.random(this._marginTop, this._height - this._marginBottom - fontSize);
         }
@@ -94,7 +96,9 @@ export class TextWriter {
         this._world.addElement(textElement);
         textElement.start();
 
-        this._textId = this.randomSetTimeout(() => this.addText(), 1000, 2500);
+        this._textId = this.randomSetTimeout(
+            () => this.addText(), this._settings.minSpawnMs, this._settings.maxSpawnMs
+        );
     }
 
     public resize(width: number, height: number) {

@@ -13,13 +13,14 @@ export interface BoundingBox {
 }
 
 export interface Settings {
-    width: string;
     height: string;
     maxTexts: number;
     maxAcceleration: number;
     headings: Heading[],
     marginTop: number;
     marginBottom: number;
+    minSpawnMs: number;
+    maxSpawnMs: number;
     texts: string[];
     color: string;
     background: string;

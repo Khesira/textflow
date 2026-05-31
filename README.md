@@ -95,30 +95,56 @@ const settings: Settings = {
 
 ## Configuration (Settings)
 
-| Property          | Type       | Default Value     | Description                                                            |
-|:------------------|:-----------|:------------------|:-----------------------------------------------------------------------|
-| `width`           | `string`   | `"100%"`          | CSS width of the slider component (e.g., `"100%"`, `"400px"`).         |
-| `height`          | `string`   | `"150px"`         | CSS height of the slider component.                                    |
-| `font`            | `string`   | `"sans-serif"`    | Font family used inside the Canvas rendering context.                  |
-| `color`           | `string`   | `"#ffffff"`       | Text color (accepts hex, rgb, rgba, or CSS color names).               |
-| `background`      | `string`   | `"transparent"`   | Background color of the canvas container.                              |
-| `maxTexts`        | `number`   | `10`              | Maximum number of text elements allowed on screen simultaneously.      |
-| `maxAcceleration` | `number`   | `3`               | Maximum velocity cap for the text particles.                           |
-| `headings`        | `string[]` | `['EAST','WEST']` | Flow directions of the texts picked randomly on each page load.        |
-| `marginTop`       | `number`   | `0`               | Top boundary padding (in pixels) to restrict the spawn area.           |
-| `marginBottom`    | `number`   | `0`               | Bottom boundary padding (in pixels) to restrict the spawn area.        |
-| `debug`           | `boolean`  | `false`           | Enables red AABB bounding boxes and highlights the canvas clear zones. |
+The component always fills the available width of its host container. Control the width using regular CSS on the element or its parent. The height can be configured via settings.
+
+| Property          | Type        | Default Value     | Description                                                            |
+|:------------------|:------------|:------------------|:-----------------------------------------------------------------------|
+| `height`          | `string`    | `"200px"`         | CSS height of the slider component.                                    |
+| `font`            | `string`    | `"sans-serif"`    | Font family used inside the Canvas rendering context.                  |
+| `color`           | `string`    | `"#ffffff"`       | Text color (accepts hex, rgb, rgba, or CSS color names).               |
+| `background`      | `string`    | `"transparent"`   | Background color of the canvas container.                              |
+| `maxTexts`        | `number`    | `10`              | Maximum number of text elements allowed on screen simultaneously.      |
+| `maxAcceleration` | `number`    | `3`               | Maximum velocity cap for the text particles.                           |
+| `headings`        | `Heading[]` | `['EAST','WEST']` | Flow directions of the texts picked randomly on each page load.        |
+| `minSpawnMs`      | `number`    | `1000`            | The minimum timespan of spawning a new text.                           |
+| `maxSpawnMs`      | `number`    | `2500`            | The maximum timespan of spawning a new text.                           |
+| `marginTop`       | `number`    | `0`               | Top boundary padding (in pixels) to restrict the spawn area.           |
+| `marginBottom`    | `number`    | `0`               | Bottom boundary padding (in pixels) to restrict the spawn area.        |
+| `debug`           | `boolean`   | `false`           | Enables red AABB bounding boxes and highlights the canvas clear zones. |
+
+### Headings
+
+The `headings` setting controls the possible flow directions. On each page load, one direction is picked randomly from the provided list.
+
+Allowed values:
+
+'NORTH' | 'NORTHEAST' | 'EAST' | 'SOUTHEAST' | 'SOUTH' | 'SOUTHWEST' | 'WEST' | 'NORTHWEST' | 'NONE'
+
+### Spawn rates
+
+The values for `minSpawnMs` and `maxSpawnMs` control the timespan between text texts spawn. Each cycle any random value between `minSpawnMs` and `maxSpawnMs` is picked and a new text is spawned after that period of time. 
+
+### Usage
+
+```typescript
+const settings: Partial<Settings> = {
+    headings: ['NORTH', 'SOUTHEAST', 'WEST'],
+    // ...
+};
+```
+
+Use `Partial<Settings>` to allow for optional properties.
 
 ## Architecture
 
 The library follows a strict Model-View-Controller (MVC) inspired architecture to decouple data, state machine, and side effects:
 
 - TextElement: Represents the physical text particle, housing position, speed, and bounding box.
-- World: The state machine driving the physics engine, handling backward-loop garbage collection and processing 2D broad-phase collisions.
+- World: The state machine driving the physics engine, handling backward-loop garbage collection, and processing 2D broad-phase collisions.
 - TextFlowView: Isolated rendering layer that handles drawing text onto the high-DPI scaled 2D context.
 - TextWriter: Factory class that manages the pseudo-randomized generation of new TextElement batches based on viewport requirements.
 - TextFlowElement: The HTML Custom Element orchestrating the components and bridging browser lifecycles.
 
 ## License
 
-MIT License - feel free to use it in your personal portfolio or commercial projects!
+MIT License – feel free to use it in your personal portfolio or commercial projects!

@@ -12,7 +12,7 @@ export class TextFlowView {
         private readonly _world: World,
     ) {
         this._target.style.display = 'block';
-        this._target.style.width = this._settings.width;
+        this._target.style.width = '100%';
         this._target.style.height = this._settings.height;
         this._target.style.background = this._settings.background;
     }
