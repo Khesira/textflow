@@ -12,11 +12,11 @@ export type Heading =
 export const VECTOR_MAPPING: Record<Heading, { readonly x: number; readonly y: number }> = {
     NORTH: {x: 0, y: -1},
     NORTHEAST: {x: 1, y: -1},
-    EAST: {x: -1, y: 0},
+    EAST: {x: 1, y: 0},
     SOUTHEAST: {x: 1, y: 1},
     SOUTH: {x: 0, y: 1},
     SOUTHWEST: {x: -1, y: 1},
-    WEST: {x: 1, y: 0},
+    WEST: {x: -1, y: 0},
     NORTHWEST: {x: -1, y: -1},
     NONE: {x: 0, y: 0}
 };

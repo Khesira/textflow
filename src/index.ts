@@ -117,7 +117,7 @@ export class TextFlowElement extends HTMLElement {
 
     private resize() {
         this.view.resize();
-        this.world.resize(this.offsetWidth);
+        this.world.resize(this.offsetWidth, this.offsetHeight);
         this.textWriter.resize(this.offsetWidth, this.offsetHeight);
     }
 
