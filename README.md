@@ -40,7 +40,7 @@ interface Props {
 
 const { texts } = Astro.props;
 
-const settings: Settings = {
+const settings: Partial<Settings> = {
     font: "Inter, sans-serif",
     color: "#ffffff",
     background: "transparent",
