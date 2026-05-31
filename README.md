@@ -27,7 +27,7 @@ bun add @khesira/textflow
 
 ## Usage
 
-1. In Astro (or similar Frontend Frameworks)
+### 1. In Astro (or similar Frontend Frameworks)
    Register the custom element in your client-side script and pass your configuration via data-* attributes.
 
 ```html
@@ -65,7 +65,7 @@ const settings: Settings = {
 </script>
 ```
 
-## 2. Pure HTML / JavaScript
+### 2. Pure HTML / JavaScript
 
 ```html
 <!DOCTYPE html>
