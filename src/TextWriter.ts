@@ -2,7 +2,7 @@ import type { Settings } from "./types";
 import type { World } from "./World";
 import { TextElement } from "./TextElement";
 import type { TextFlowView } from "./TextFlowView";
-import type { Direction } from "./Direction.ts";
+import type { Direction } from "./Direction";
 
 export class TextWriter {
     private _textId: number | undefined = undefined;
@@ -44,18 +44,45 @@ export class TextWriter {
         const fontSize = this.random(this._minFontSize, this._maxFontSize);
         const text = this._texts[this.random(this._texts.length)];
 
-        const speed = this.random(1, this._settings.maxAcceleration + 1) * this._textDirection.x;
-
         this._view.setFontSize(fontSize);
         const textWidth = this._view.measureText(text);
 
-        const xPosition = this._textDirection.x < 0 ? this._width : -textWidth;
-        const yPosition = this.random(this._marginTop, this._height - this._marginBottom - this._marginTop);
+        const baseSpeed = this.random(1, this._settings.maxAcceleration + 1);
+
+        let xPosition;
+        let yPosition;
+
+        const dirX = this._textDirection.x;
+        const dirY = this._textDirection.y;
+
+        if (dirX > 0) {
+            xPosition = -textWidth;
+        } else if (dirX < 0) {
+            xPosition = this._width;
+        } else {
+            xPosition = this.random(0, this._width - textWidth);
+        }
+
+        if (dirY > 0) {
+            yPosition = -fontSize + this._marginTop;
+        } else if (dirY < 0) {
+            yPosition = this._height - this._marginBottom;
+        } else {
+            yPosition = this.random(this._marginTop, this._height - this._marginBottom - fontSize);
+        }
+
+        if (this._textDirection.isDiagonal) {
+            if (Math.random() > 0.5) {
+                yPosition = this.random(this._marginTop, this._height - this._marginBottom - fontSize);
+            } else {
+                xPosition = this.random(0, this._width - textWidth);
+            }
+        }
 
         const textElement = new TextElement(
             xPosition,
             yPosition,
-            speed,
+            baseSpeed,
             textWidth,
             fontSize,
             text,
