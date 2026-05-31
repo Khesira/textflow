@@ -1,10 +1,12 @@
 import type {Settings} from "./types.ts";
+import {type Heading, VECTOR_MAPPING} from "./Direction.ts";
 
 export const defaultSettings: Settings = {
     width: '100%',
     height: '200px',
     maxTexts: 15,
     maxAcceleration: 15,
+    headings: ['EAST', 'WEST'],
     marginTop: 0,
     marginBottom: 0,
     texts: ['Add', 'your', 'own', 'texts', 'here'],
@@ -25,6 +27,16 @@ export function sanitizeSettings(userSettings: any): Settings {
 
     if (typeof userSettings.maxAcceleration === 'number' && userSettings.maxAcceleration > 0) {
         safeSettings.maxAcceleration = userSettings.maxAcceleration;
+    }
+
+    if (Array.isArray(userSettings.headings)) {
+        const validHeadings = userSettings.headings.filter((dir: any) => {
+            return typeof dir === 'string' && dir.toUpperCase() in VECTOR_MAPPING;
+        }) as Heading[];
+
+        if (validHeadings.length > 0) {
+            safeSettings.headings = validHeadings;
+        }
     }
 
     if (typeof userSettings.marginTop === 'number' && userSettings.marginTop >= 0) {

@@ -2,7 +2,7 @@ import { World } from './World';
 import { TextFlowView } from './TextFlowView';
 import { TextWriter } from './TextWriter';
 import {defaultSettings, sanitizeSettings} from './settings';
-import { directions, randomDirection } from "./directions";
+import { Direction } from "./Direction.ts";
 import type { Settings } from './types'
 
 export type { Settings };
@@ -34,16 +34,12 @@ export class TextFlowElement extends HTMLElement {
         const rawSettings = this.dataset.settings;
         const userSettings = rawSettings ? JSON.parse(rawSettings) : defaultSettings;
         const settings = sanitizeSettings(userSettings);
+        console.log("SETTINGS", settings)
 
         const rawTexts = this.dataset.texts;
         const texts = rawTexts ? JSON.parse(rawTexts) : settings.texts;
 
-        const availableDirections = [
-            directions.east,
-            directions.west
-        ];
-
-        const textDirection = randomDirection(availableDirections);
+        const textDirection = Direction.randomDirection(settings.headings);
 
         this.world = new World(textDirection);
 

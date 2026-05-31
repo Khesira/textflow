@@ -2,7 +2,7 @@ import type { Settings } from "./types";
 import type { World } from "./World";
 import { TextElement } from "./TextElement";
 import type { TextFlowView } from "./TextFlowView";
-import type { Direction } from "./directions";
+import type { Direction } from "./Direction.ts";
 
 export class TextWriter {
     private _textId: number | undefined = undefined;

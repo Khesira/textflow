@@ -1,5 +1,6 @@
-import type {Direction} from "./directions";
+import type {Direction} from "./Direction.ts";
 import type {TextElement} from "./TextElement";
+import {CollisionAxis} from "./types.ts";
 
 export class World {
     private updateId: number | undefined = undefined;
@@ -46,7 +47,7 @@ export class World {
         return !(hCollision || vCollision);
     }
 
-    private getCollisionAxis(a: TextElement, b: TextElement): 'x' | 'y' {
+    private getCollisionAxis(a: TextElement, b: TextElement): CollisionAxis {
         const xValues = [a.positionX, a.positionX + a.width, b.positionX, b.positionX + b.width];
         const yValues = [a.positionY, a.positionY + a.height, b.positionY, b.positionY + b.height];
 
@@ -57,21 +58,25 @@ export class World {
         const overlappingX = xValues[2] - xValues[1];
         const overlappingY = yValues[2] - yValues[1];
 
-        return overlappingX < overlappingY ? 'x' : 'y';
+        return overlappingX < overlappingY
+            ? CollisionAxis.Horizontal
+            : CollisionAxis.Vertical;
     }
 
     private handleCollision(a: TextElement, b: TextElement) {
         const axis = this.getCollisionAxis(a, b);
-
-        if (axis === 'x') {
-            this.handleXCollision(a, b);
-        } else {
-            this.handleYCollision(a, b);
+        switch (axis) {
+            case CollisionAxis.Horizontal:
+                this.handleXCollision(a, b);
+                break;
+            case CollisionAxis.Vertical:
+                this.handleYCollision(a, b);
+                break;
         }
     }
 
     private handleXCollision(a: TextElement, b: TextElement) {
-        if (this._textDirection.x === 0) return;
+        if (!this._textDirection.isHorizontal) return;
 
         const aIsLeftOfB = a.boundingBox.left < b.boundingBox.left;
         const left = aIsLeftOfB ? a : b;
@@ -87,7 +92,7 @@ export class World {
     }
 
     private handleYCollision(a: TextElement, b: TextElement) {
-        if (this._textDirection.y === 0) return;
+        if (!this._textDirection.isVertical) return;
 
         const aIsAboveB = a.boundingBox.top < b.boundingBox.top;
         const top = aIsAboveB ? a : b;

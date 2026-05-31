@@ -1,5 +1,5 @@
 import type {BoundingBox, Settings} from "./types";
-import type {Direction} from "./directions";
+import type {Direction} from "./Direction.ts";
 
 export class TextElement {
     private _accelerateId: number|undefined = undefined;
