@@ -34,7 +34,6 @@ export class TextFlowElement extends HTMLElement {
         const rawSettings = this.dataset.settings;
         const userSettings = rawSettings ? JSON.parse(rawSettings) : defaultSettings;
         const settings = sanitizeSettings(userSettings);
-        console.log("SETTINGS", settings)
 
         const rawTexts = this.dataset.texts;
         const texts = rawTexts ? JSON.parse(rawTexts) : settings.texts;

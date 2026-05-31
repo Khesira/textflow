@@ -31,7 +31,6 @@ export class Direction {
 
     public static randomDirection(availableDirections: readonly Heading[] = ['EAST', 'WEST']): Direction {
         const activeHeading = availableDirections[Math.floor(Math.random() * availableDirections.length)];
-        console.log("ACTIVE HEADING", activeHeading);
         return Direction.from(activeHeading);
     }
 
