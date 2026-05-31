@@ -95,18 +95,19 @@ const settings: Settings = {
 
 ## Configuration (Settings)
 
-| Property | Type | Default Value | Description |
-| :--- | :--- | :--- | :--- |
-| `width` | `string` | `"100%"` | CSS width of the slider component (e.g., `"100%"`, `"400px"`). |
-| `height` | `string` | `"150px"` | CSS height of the slider component. |
-| `font` | `string` | `"sans-serif"` | Font family used inside the Canvas rendering context. |
-| `color` | `string` | `"#ffffff"` | Text color (accepts hex, rgb, rgba, or CSS color names). |
-| `background` | `string` | `"transparent"` | Background color of the canvas container. |
-| `maxTexts` | `number` | `10` | Maximum number of text elements allowed on screen simultaneously. |
-| `maxAcceleration` | `number` | `3` | Maximum velocity cap for the text particles. |
-| `marginTop` | `number` | `0` | Top boundary padding (in pixels) to restrict the spawn area. |
-| `marginBottom` | `number` | `0` | Bottom boundary padding (in pixels) to restrict the spawn area. |
-| `debug` | `boolean` | `false` | Enables red AABB bounding boxes and highlights the canvas clear zones. |
+| Property          | Type       | Default Value     | Description                                                            |
+|:------------------|:-----------|:------------------|:-----------------------------------------------------------------------|
+| `width`           | `string`   | `"100%"`          | CSS width of the slider component (e.g., `"100%"`, `"400px"`).         |
+| `height`          | `string`   | `"150px"`         | CSS height of the slider component.                                    |
+| `font`            | `string`   | `"sans-serif"`    | Font family used inside the Canvas rendering context.                  |
+| `color`           | `string`   | `"#ffffff"`       | Text color (accepts hex, rgb, rgba, or CSS color names).               |
+| `background`      | `string`   | `"transparent"`   | Background color of the canvas container.                              |
+| `maxTexts`        | `number`   | `10`              | Maximum number of text elements allowed on screen simultaneously.      |
+| `maxAcceleration` | `number`   | `3`               | Maximum velocity cap for the text particles.                           |
+| `headings`        | `string[]` | `['EAST','WEST']` | Flow directions of the texts picked randomly on each page load.        |
+| `marginTop`       | `number`   | `0`               | Top boundary padding (in pixels) to restrict the spawn area.           |
+| `marginBottom`    | `number`   | `0`               | Bottom boundary padding (in pixels) to restrict the spawn area.        |
+| `debug`           | `boolean`  | `false`           | Enables red AABB bounding boxes and highlights the canvas clear zones. |
 
 ## Architecture
 
