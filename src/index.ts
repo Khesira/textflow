@@ -38,6 +38,10 @@ export class TextFlowElement extends HTMLElement {
         const rawTexts = this.dataset.texts;
         const texts = rawTexts ? JSON.parse(rawTexts) : settings.texts;
 
+        const screenReaderList = this.generateScreenReaderTextList(texts);
+        this.querySelector('ul.sr-only')?.remove();
+        canvas.appendChild(screenReaderList);
+
         const textDirection = Direction.randomDirection(settings.headings);
 
         this.world = new World(textDirection);
@@ -127,6 +131,20 @@ export class TextFlowElement extends HTMLElement {
         } else {
             this.startLoop();
         }
+    }
+
+    private generateScreenReaderTextList(texts: string[]): HTMLUListElement {
+        const ul = document.createElement('ul');
+        ul.className = 'sr-only';
+        ul.setAttribute('aria-label', 'Currently flowing words on the canvas');
+
+        texts.forEach((text) => {
+            const li = document.createElement('li');
+            li.textContent = text;
+            ul.appendChild(li);
+        });
+
+        return ul;
     }
 }
 
